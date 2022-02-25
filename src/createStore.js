@@ -1,5 +1,22 @@
 let state;
 
+function createStore(reducer) {
+  function getState() {
+    return state;
+  }
+
+  function dispatch(action) {
+    state = reducer(state, action);
+    render();
+    return state;
+  }
+
+  return {
+    getState: getState(),
+    dispatch: dispatch(),
+  };
+}
+
 function reducer(state = { count: 0 }, action) {
   switch (action.type) {
     case "counter/increment":
